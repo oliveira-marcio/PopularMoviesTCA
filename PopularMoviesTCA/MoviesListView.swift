@@ -16,6 +16,14 @@ struct MoviesListView: View {
             Text("Hello, world!")
         }
         .padding()
+        .task {
+            do {
+                let movies = try await MoviesClient.shared.fetchMovies()
+                print("Movies: \(movies.count)")
+            } catch {
+                print("Movies error: \(error)")
+            }
+        }
     }
 }
 

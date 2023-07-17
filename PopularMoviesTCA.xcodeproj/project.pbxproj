@@ -15,6 +15,8 @@
 		363D68D82A6575790035C4E4 /* PopularMoviesTCAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D68D72A6575790035C4E4 /* PopularMoviesTCAUITests.swift */; };
 		363D68DA2A6575790035C4E4 /* PopularMoviesTCAUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D68D92A6575790035C4E4 /* PopularMoviesTCAUITestsLaunchTests.swift */; };
 		363D68E82A6577300035C4E4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 363D68E72A6577300035C4E4 /* ComposableArchitecture */; };
+		363D68EA2A657A030035C4E4 /* MoviesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D68E92A657A030035C4E4 /* MoviesClient.swift */; };
+		363D68EC2A657BA30035C4E4 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 363D68EB2A657BA30035C4E4 /* Secrets.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,9 @@
 		363D68D32A6575790035C4E4 /* PopularMoviesTCAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopularMoviesTCAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		363D68D72A6575790035C4E4 /* PopularMoviesTCAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesTCAUITests.swift; sourceTree = "<group>"; };
 		363D68D92A6575790035C4E4 /* PopularMoviesTCAUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesTCAUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		363D68E92A657A030035C4E4 /* MoviesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesClient.swift; sourceTree = "<group>"; };
+		363D68EB2A657BA30035C4E4 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		363D68ED2A657BFD0035C4E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +101,13 @@
 		363D68BB2A6575780035C4E4 /* PopularMoviesTCA */ = {
 			isa = PBXGroup;
 			children = (
+				363D68ED2A657BFD0035C4E4 /* Info.plist */,
 				363D68BC2A6575780035C4E4 /* PopularMoviesTCAApp.swift */,
 				363D68BE2A6575780035C4E4 /* MoviesListView.swift */,
+				363D68E92A657A030035C4E4 /* MoviesClient.swift */,
 				363D68C02A6575790035C4E4 /* Assets.xcassets */,
 				363D68C22A6575790035C4E4 /* Preview Content */,
+				363D68EB2A657BA30035C4E4 /* Secrets.xcconfig */,
 			);
 			path = PopularMoviesTCA;
 			sourceTree = "<group>";
@@ -241,6 +249,7 @@
 			files = (
 				363D68C42A6575790035C4E4 /* Preview Assets.xcassets in Resources */,
 				363D68C12A6575790035C4E4 /* Assets.xcassets in Resources */,
+				363D68EC2A657BA30035C4E4 /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +276,7 @@
 			files = (
 				363D68BF2A6575780035C4E4 /* MoviesListView.swift in Sources */,
 				363D68BD2A6575780035C4E4 /* PopularMoviesTCAApp.swift in Sources */,
+				363D68EA2A657A030035C4E4 /* MoviesClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +429,7 @@
 		};
 		363D68DE2A6575790035C4E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 363D68EB2A657BA30035C4E4 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -427,6 +438,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PopularMoviesTCA/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PopularMoviesTCA/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -447,6 +459,7 @@
 		};
 		363D68DF2A6575790035C4E4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 363D68EB2A657BA30035C4E4 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -455,6 +468,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PopularMoviesTCA/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PopularMoviesTCA/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
