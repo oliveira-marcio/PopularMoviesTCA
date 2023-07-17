@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct PopularMoviesTCAApp: App {
+    static let store = Store(initialState: MoviesListFeature.State()) {
+        MoviesListFeature()
+            ._printChanges()
+    }
+
     var body: some Scene {
         WindowGroup {
-            MoviesListView()
+            MoviesListView(store: PopularMoviesTCAApp.store)
         }
     }
 }
