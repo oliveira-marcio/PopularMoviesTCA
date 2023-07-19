@@ -14,19 +14,43 @@ struct MoviesListView: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
+                Text("Movies")
+                    .font(.largeTitle)
                 if let apiError = viewStore.apiError {
-                    Text("Error: \(apiError)")
+                    ErrorView(errorMessage: apiError)
                 } else {
-                    Text("Movies: \(viewStore.movies.count)")
+                    List {
+                        ForEach(viewStore.movies, id:\.self) { movie in
+                            Text(movie.title)
+                                .bold()
+                        }
+                    }
+                    .listStyle(PlainListStyle())
                 }
             }
-            .padding()
             .task {
                 viewStore.send(.appLaunched)
             }
+        }
+    }
+}
+
+struct ErrorView: View {
+    let errorMessage: String
+
+    init(errorMessage: String) {
+        self.errorMessage = errorMessage
+    }
+
+    var body: some View {
+        VStack {
+            Spacer()
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundColor(.accentColor)
+                .padding(0.5)
+            Text("Error: \(errorMessage)")
+            Spacer()
         }
     }
 }
@@ -41,6 +65,8 @@ struct ContentView_Previews: PreviewProvider {
             MoviesListFeature()
         } withDependencies: {
             $0.moviesClient.fetchMovies = {
+// For debugging
+//                throw AError.oops
                 [
                     Movie(title: "Matrix",
                           overview: "",
