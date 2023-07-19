@@ -21,8 +21,7 @@ struct MoviesListView: View {
                 } else {
                     List {
                         ForEach(viewStore.movies, id:\.self) { movie in
-                            Text(movie.title)
-                                .bold()
+                            MovieListItem(movie: movie)
                         }
                     }
                     .listStyle(PlainListStyle())
@@ -35,27 +34,8 @@ struct MoviesListView: View {
     }
 }
 
-struct ErrorView: View {
-    let errorMessage: String
-
-    init(errorMessage: String) {
-        self.errorMessage = errorMessage
-    }
-
-    var body: some View {
-        VStack {
-            Spacer()
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-                .padding(0.5)
-            Text("Error: \(errorMessage)")
-            Spacer()
-        }
-    }
-}
-
-enum AError: Error {
+// For debugging
+enum AnError: Error {
     case oops
 }
 
@@ -66,12 +46,21 @@ struct ContentView_Previews: PreviewProvider {
         } withDependencies: {
             $0.moviesClient.fetchMovies = {
 // For debugging
-//                throw AError.oops
+//                throw AnError.oops
                 [
-                    Movie(title: "Matrix",
+                    Movie(title: "Movie 1",
+                          overview: "",
+                          posterPath: "",
+                          releaseDate: ""),
+                    Movie(title: "Movie 2",
+                          overview: "",
+                          posterPath: "",
+                          releaseDate: ""),
+                    Movie(title: "Movie 3",
                           overview: "",
                           posterPath: "",
                           releaseDate: "")
+
                 ]
             }
         }
