@@ -29,7 +29,8 @@ final class MoviesListFeatureTests: XCTestCase {
     }
 
     func testAppLaunch_withSuccessfulApiResponse() async {
-        let testMovie = Movie(title: "Title",
+        let testMovie = Movie(id: 1,
+                              title: "Title",
                               overview: "Overview",
                               posterPath: "Poster",
                               releaseDate: "Date")

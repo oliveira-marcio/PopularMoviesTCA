@@ -27,7 +27,8 @@ struct MovieListItem: View {
 
 struct MovieListItem_Previews: PreviewProvider {
     static var previews: some View {
-        MovieListItem(movie: Movie(title: "Movie 1",
+        MovieListItem(movie: Movie(id: 1,
+                                   title: "Movie 1",
                                    overview: "",
                                    posterPath: "",
                                    releaseDate: ""))

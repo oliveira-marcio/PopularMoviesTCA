@@ -12,6 +12,7 @@ struct MoviesEntity: Decodable {
 }
 
 struct MovieEntity: Decodable {
+    var id: Int
     var title: String
     var overview: String
     var posterPath: String

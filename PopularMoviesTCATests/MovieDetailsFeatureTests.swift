@@ -15,7 +15,8 @@ final class MovieDetailsFeatureTests: XCTestCase {
     func testFavoriteButtonTapped() async {
         let store = TestStore(
             initialState: MovieDetailsFeature.State(
-                movie: Movie(title: "",
+                movie: Movie(id: 0,
+                             title: "",
                              overview: "",
                              posterPath: "",
                              releaseDate: "",

@@ -20,7 +20,7 @@ struct MoviesListView: View {
                     ErrorView(errorMessage: apiError)
                 } else {
                     List {
-                        ForEach(viewStore.movies, id:\.self) { movie in
+                        ForEach(viewStore.movies) { movie in
                             MovieListItem(movie: movie)
                         }
                     }
@@ -48,15 +48,18 @@ struct ContentView_Previews: PreviewProvider {
 // For debugging
 //                throw AnError.oops
                 [
-                    Movie(title: "Movie 1",
+                    Movie(id: 1,
+                          title: "Movie 1",
                           overview: "",
                           posterPath: "",
                           releaseDate: ""),
-                    Movie(title: "Movie 2",
+                    Movie(id: 2,
+                          title: "Movie 2",
                           overview: "",
                           posterPath: "",
                           releaseDate: ""),
-                    Movie(title: "Movie 3",
+                    Movie(id: 3,
+                          title: "Movie 3",
                           overview: "",
                           posterPath: "",
                           releaseDate: "")

@@ -37,7 +37,8 @@ extension MoviesClient: DependencyKey {
 
 extension Movie {
     init(from entity: MovieEntity) {
-        self.init(title: entity.title,
+        self.init(id: entity.id,
+                  title: entity.title,
                   overview: entity.overview,
                   posterPath: "https://image.tmdb.org/t/p/w500\(entity.posterPath)",
                   releaseDate: entity.releaseDate)

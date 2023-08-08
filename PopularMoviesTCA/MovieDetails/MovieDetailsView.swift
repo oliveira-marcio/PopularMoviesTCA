@@ -43,7 +43,8 @@ struct MovieDetailsView_Previews: PreviewProvider {
         MovieDetailsView(
             store: Store(
                 initialState: MovieDetailsFeature.State(
-                    movie: Movie(title: "Matrix",
+                    movie: Movie(id: 1,
+                                 title: "Matrix",
                                  overview: "Nice movie about people killing each other in a fake world",
                                  posterPath: "foo.com",
                                  releaseDate: "1/1/1999")

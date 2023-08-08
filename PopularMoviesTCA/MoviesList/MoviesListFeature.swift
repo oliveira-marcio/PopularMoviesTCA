@@ -12,7 +12,7 @@ struct MoviesListFeature: ReducerProtocol {
     @Dependency(\.moviesClient) var moviesClient
 
     struct State: Equatable {
-        var movies = [Movie]()
+        var movies: IdentifiedArrayOf<Movie> = []
         var apiError: String?
     }
 
@@ -33,7 +33,7 @@ struct MoviesListFeature: ReducerProtocol {
             }
 
         case let .moviesResponse(.success(movies)):
-            state.movies = movies
+            state.movies.append(contentsOf: movies)
             state.apiError = nil
             return .none
 
