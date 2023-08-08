@@ -12,14 +12,17 @@ struct Movie: Hashable {
     let overview: String
     let posterPath: String
     let releaseDate: String
+    var isFavorite: Bool
 
     init(title: String,
          overview: String,
          posterPath: String,
-         releaseDate: String) {
+         releaseDate: String,
+         isFavorite: Bool = false) {
         self.title = title
         self.overview = overview
         self.posterPath = posterPath
         self.releaseDate = releaseDate
+        self.isFavorite = isFavorite
     }
 }
