@@ -56,4 +56,40 @@ final class MoviesListFeatureTests: XCTestCase {
             $0.apiError = "API Failure"
         }
     }
+
+    func testAddMovieToFavorites() async {
+        let movie1 = Movie(id: 1, title: "", overview: "", posterPath: "", releaseDate: "", isFavorite: false)
+        let movie2 = Movie(id: 2, title: "", overview: "", posterPath: "", releaseDate: "", isFavorite: false)
+        let favoriteMovie1 = Movie(id: 1, title: "", overview: "", posterPath: "", releaseDate: "", isFavorite: true)
+
+        store.dependencies.moviesClient.fetchMovies = { [movie1, movie2] }
+        store.exhaustivity = .off
+
+        await store.send(.appLaunched)
+        await store.send(.path(.push(id: 0, state: MovieDetailsFeature.State(movie: movie1))))
+        await store.send(.path(.element(id: 0, action: .favoriteButtonTapped)))
+        await store.skipReceivedActions()
+
+        store.assert {
+            $0.movies = [favoriteMovie1, movie2]
+        }
+    }
+
+    func testRemoveMovieFromFavorites() async {
+        let favoriteMovie1 = Movie(id: 1, title: "", overview: "", posterPath: "", releaseDate: "", isFavorite: true)
+        let favoriteMovie2 = Movie(id: 2, title: "", overview: "", posterPath: "", releaseDate: "", isFavorite: true)
+        let movie1 = Movie(id: 1, title: "", overview: "", posterPath: "", releaseDate: "", isFavorite: false)
+
+        store.dependencies.moviesClient.fetchMovies = { [favoriteMovie1, favoriteMovie2] }
+        store.exhaustivity = .off
+
+        await store.send(.appLaunched)
+        await store.send(.path(.push(id: 0, state: MovieDetailsFeature.State(movie: favoriteMovie1))))
+        await store.send(.path(.element(id: 0, action: .favoriteButtonTapped)))
+        await store.skipReceivedActions()
+
+        store.assert {
+            $0.movies = [movie1, favoriteMovie2]
+        }
+    }
 }

@@ -21,6 +21,7 @@ struct MovieListItem: View {
                         height: 75)
             Text(movie.title)
                 .bold()
+                .foregroundColor(movie.isFavorite ? .blue : .black)
         }
     }
 }

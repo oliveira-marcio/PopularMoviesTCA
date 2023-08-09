@@ -12,41 +12,50 @@ struct MoviesListView: View {
     let store: StoreOf<MoviesListFeature>
 
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack {
-                Text("Movies")
-                    .font(.largeTitle)
-                if let apiError = viewStore.apiError {
-                    ErrorView(errorMessage: apiError)
-                } else {
-                    List {
-                        ForEach(viewStore.movies) { movie in
-                            MovieListItem(movie: movie)
+        NavigationStackStore(self.store.scope(state: \.path, action: { .path($0) })) {
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
+                VStack {
+                    if let apiError = viewStore.apiError {
+                        ErrorView(errorMessage: apiError)
+                    } else {
+                        List {
+                            ForEach(viewStore.movies) { movie in
+                                NavigationLink(state: MovieDetailsFeature.State(movie: movie)) {
+                                    MovieListItem(movie: movie)
+                                }
+                            }
                         }
                     }
-                    .listStyle(PlainListStyle())
+                }
+                .navigationTitle("Movies")
+                .task {
+                    viewStore.send(.appLaunched)
                 }
             }
-            .task {
-                viewStore.send(.appLaunched)
-            }
+        } destination: { store in
+            MovieDetailsView(store: store)
         }
     }
 }
 
-// For debugging
-enum AnError: Error {
-    case oops
-}
-
 struct ContentView_Previews: PreviewProvider {
+    enum AnError: LocalizedError {
+        case oops
+        var errorDescription: String? { "Something went wrong" }
+    }
+
     static var previews: some View {
-        let store = Store(initialState: MoviesListFeature.State()) {
-            MoviesListFeature()
-        } withDependencies: {
+        Group {
+            MoviesListView(store: getWorkingStore())
+                .previewDisplayName("Movies List")
+            MoviesListView(store: getFailingStore())
+                .previewDisplayName("API Error")
+        }
+    }
+
+    private static func getWorkingStore() -> Store<MoviesListFeature.State, MoviesListFeature.Action> {
+        getStore {
             $0.moviesClient.fetchMovies = {
-// For debugging
-//                throw AnError.oops
                 [
                     Movie(id: 1,
                           title: "Movie 1",
@@ -67,6 +76,19 @@ struct ContentView_Previews: PreviewProvider {
                 ]
             }
         }
-        return MoviesListView(store: store)
+    }
+
+    private static func getFailingStore() -> Store<MoviesListFeature.State, MoviesListFeature.Action> {
+        getStore {
+            $0.moviesClient.fetchMovies = {
+                throw AnError.oops
+            }
+        }
+    }
+
+    private static func getStore(withDependencies: ((inout DependencyValues) -> Void)? = nil) -> Store<MoviesListFeature.State, MoviesListFeature.Action> {
+        Store(initialState: MoviesListFeature.State(),
+              reducer: { MoviesListFeature() },
+              withDependencies: withDependencies)
     }
 }

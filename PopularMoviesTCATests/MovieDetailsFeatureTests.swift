@@ -31,8 +31,10 @@ final class MovieDetailsFeatureTests: XCTestCase {
         await store.send(.favoriteButtonTapped) {
             $0.movie.isFavorite = true
         }
+        await store.receive(.delegate(.toggleFavorite))
         await store.send(.favoriteButtonTapped) {
             $0.movie.isFavorite = false
         }
+        await store.receive(.delegate(.toggleFavorite))
     }
 }
