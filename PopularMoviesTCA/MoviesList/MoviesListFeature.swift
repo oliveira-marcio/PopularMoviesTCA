@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct MoviesListFeature: ReducerProtocol {
+struct MoviesListFeature: Reducer {
     @Dependency(\.moviesClient) var moviesClient
 
     struct State: Equatable {
@@ -23,7 +23,7 @@ struct MoviesListFeature: ReducerProtocol {
         case path(StackAction<MovieDetailsFeature.State, MovieDetailsFeature.Action>)
     }
 
-    var body: some ReducerProtocolOf<Self> {
+    var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .appLaunched:

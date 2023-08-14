@@ -12,7 +12,7 @@ import ComposableArchitecture
 @MainActor
 final class MoviesListFeatureTests: XCTestCase {
 
-    var store: TestStore<MoviesListFeature.State, MoviesListFeature.Action, MoviesListFeature.State, MoviesListFeature.Action, ()>!
+    var store: TestStore<MoviesListFeature.State, MoviesListFeature.Action>!
 
     override func setUp() {
         store = TestStore(initialState: MoviesListFeature.State()) {

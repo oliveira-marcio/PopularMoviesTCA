@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct MovieDetailsFeature: ReducerProtocol {
+struct MovieDetailsFeature: Reducer {
     struct State: Equatable {
         var movie: Movie
     }
@@ -21,7 +21,7 @@ struct MovieDetailsFeature: ReducerProtocol {
         }
     }
 
-    func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .favoriteButtonTapped:
             state.movie.isFavorite.toggle()
